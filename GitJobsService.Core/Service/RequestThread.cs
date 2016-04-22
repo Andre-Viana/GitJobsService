@@ -20,16 +20,16 @@ namespace GitJobsService.Core.Service
         }
 
         public async void Run()
-        {
+        { 
             string json = await DoRequest();
             List<Position> positions = JsonConvert.DeserializeObject<List<Position>>(json);
             if (listener != null)
             {
-                listener.OnResult(positions);
+                listener.OnResult(positions); //O metodo em mainactivity
             }
         }
 
-        private async Task<string> DoRequest()
+        private async Task<string> DoRequest() //aqui faz a requisicao web. Envia url pra  a api do github 
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(this.url));
             request.ContentType = "application/json";
@@ -45,7 +45,7 @@ namespace GitJobsService.Core.Service
                 content = reader.ReadToEnd();
                 
             }
-            catch(WebException e)
+            catch(WebException e) //classe de ecessao se tiver um erro de internet, pega ecessao e volta ensagem de erro.
             {
                 throw new WebException("Something went wrong: " + e.Response);   
             }

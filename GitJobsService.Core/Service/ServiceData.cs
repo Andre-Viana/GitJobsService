@@ -70,3 +70,4 @@
         }
     }
 }
+//montando as urls de busca para o gitjobs
